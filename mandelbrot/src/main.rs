@@ -138,7 +138,8 @@ fn main() {
     let mut pixels = vec![0; bounds.0 * bounds.1];
 
     // render(&mut pixels, bounds, upper_left, lower_right);
-    let threads = 8;
+    let threads = num_cpus::get() * 2;
+    println!("This program will spawn {} threads.", threads);
     let rows_per_band = bounds.1 / threads + 1;
     {
         let bands: Vec<&mut [u8]> = pixels.chunks_mut(rows_per_band * bounds.0).collect();
